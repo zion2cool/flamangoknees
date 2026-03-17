@@ -3,11 +3,113 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <title>Unblocked Games Hub</title>
+    <link rel="stylesheet" href="/src/index.css">
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body class="bg-zinc-950 text-zinc-100 font-sans min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div id="logo" class="flex items-center gap-2 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
+          <h1 class="text-xl font-bold tracking-tight">Unblocked Hub</h1>
+        </div>
+
+        <div class="flex-1 max-w-md mx-4">
+          <div class="relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Search games..."
+              class="w-full bg-zinc-800 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-emerald-500 transition-all outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="hidden sm:flex items-center gap-4 text-sm font-medium text-zinc-400">
+          <span class="hover:text-emerald-500 cursor-pointer transition-colors">New</span>
+          <span class="hover:text-emerald-500 cursor-pointer transition-colors">Popular</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Categories -->
+      <div id="categories-container" class="flex gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+        <!-- Categories will be injected here -->
+      </div>
+
+      <!-- Games Grid -->
+      <div id="games-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+        <!-- Games will be injected here -->
+      </div>
+
+      <div id="no-results" class="hidden text-center py-20">
+        <p class="text-zinc-500">No games found matching your search.</p>
+      </div>
+    </main>
+
+    <!-- Game Modal -->
+    <div id="game-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-sm">
+      <div class="relative w-full max-w-6xl aspect-video bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl flex flex-col">
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-zinc-800 bg-zinc-900/50">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl overflow-hidden border border-zinc-700">
+              <img id="modal-thumb" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h2 id="modal-title" class="font-bold text-lg leading-tight"></h2>
+              <p id="modal-category" class="text-xs text-zinc-500 uppercase tracking-wider font-semibold"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="modal-external" class="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-400 hover:text-zinc-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+            </button>
+            <button id="close-modal" class="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-400 hover:text-zinc-100">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Iframe Container -->
+        <div class="flex-1 bg-black relative">
+          <iframe id="game-iframe" class="w-full h-full border-none" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="px-6 py-3 bg-zinc-900/50 flex items-center justify-between text-xs text-zinc-500">
+          <div class="flex items-center gap-4">
+            <span>Controls: Use Keyboard/Mouse</span>
+            <span>•</span>
+            <span>Platform: Web Browser</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 3 6 6"/><path d="m9 21-6-6"/><path d="M21 3v6h-6"/><path d="M3 21v-6h6"/></svg>
+            <span>Press F11 for Fullscreen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="border-t border-zinc-900 py-12 mt-20">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-500"><line x1="6" x2="10" y1="12" y2="12"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="15" x2="15.01" y1="13" y2="13"/><line x1="18" x2="18.01" y1="11" y2="11"/><rect width="20" height="12" x="2" y="6" rx="2"/></svg>
+          <span class="font-bold">Unblocked Hub</span>
+        </div>
+        <p class="text-zinc-500 text-sm">
+          A curated collection of web games for school and work.
+        </p>
+        <div class="mt-8 text-zinc-600 text-xs">
+          © 2026 Unblocked Hub. All games are property of their respective owners.
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
 
